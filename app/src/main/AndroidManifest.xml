@@ -12,7 +12,7 @@
         android:theme="@style/Theme.EmployeesSimple"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MainActivity"
+            android:name=".screens.employees.EmployeeListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
