@@ -23,4 +23,6 @@ public abstract class AppDatabase extends RoomDatabase {
             return database;
         }
     }
+
+    public abstract EmployeeDao employeeDao();
 }
