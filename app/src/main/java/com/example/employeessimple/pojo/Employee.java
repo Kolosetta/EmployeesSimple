@@ -1,68 +1,84 @@
 package com.example.employeessimple.pojo;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
+@Entity(tableName = "employees")
 public class Employee {
-        @SerializedName("f_name")
-        @Expose
-        private String fName;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
-        @SerializedName("l_name")
-        @Expose
-        private String lName;
+    @SerializedName("f_name")
+    @Expose
+    private String fName;
 
-        @SerializedName("birthday")
-        @Expose
-        private String birthday;
+    @SerializedName("l_name")
+    @Expose
+    private String lName;
 
-        @SerializedName("avatr_url")
-        @Expose
-        private String avatrUrl;
+    @SerializedName("birthday")
+    @Expose
+    private String birthday;
 
-        @SerializedName("specialty")
-        @Expose
-        private List<Specialty> specialty = null;
+    @SerializedName("avatr_url")
+    @Expose
+    private String avatrUrl;
 
-        public String getfName() {
-            return fName;
-        }
+    /*@SerializedName("specialty")
+    @Expose
+    private List<Specialty> specialty = null;*/
 
-        public void setfName(String fName) {
-            this.fName = fName;
-        }
+    public int getId() {
+        return id;
+    }
 
-        public String getlName() {
-            return lName;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        public void setlName(String lName) {
-            this.lName = lName;
-        }
+    public String getfName() {
+        return fName;
+    }
 
-        public String getBirthday() {
-            return birthday;
-        }
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
 
-        public void setBirthday(String birthday) {
-            this.birthday = birthday;
-        }
+    public String getlName() {
+        return lName;
+    }
 
-        public String getAvatrUrl() {
-            return avatrUrl;
-        }
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
 
-        public void setAvatrUrl(String avatrUrl) {
-            this.avatrUrl = avatrUrl;
-        }
+    public String getBirthday() {
+        return birthday;
+    }
 
-        public List<Specialty> getSpecialty() {
-            return specialty;
-        }
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
 
-        public void setSpecialty(List<Specialty> specialty) {
-            this.specialty = specialty;
-        }
+    public String getAvatrUrl() {
+        return avatrUrl;
+    }
+
+    public void setAvatrUrl(String avatrUrl) {
+        this.avatrUrl = avatrUrl;
+    }
+
+   /* public List<Specialty> getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(List<Specialty> specialty) {
+        this.specialty = specialty;
+    }*/
 
 }
