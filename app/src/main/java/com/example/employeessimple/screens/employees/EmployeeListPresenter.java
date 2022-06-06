@@ -25,7 +25,7 @@ public class EmployeeListPresenter {
                 .subscribe(new Consumer<Response>() {
                     @Override
                     public void accept(Response response) throws Exception { // Метод срабатывает при успешном приеме данных
-                        viewInterface.showData(response.getResponse());
+                        viewInterface.showData(response.getEmployees());
                     }
                 }, new Consumer<Throwable>() {
                     @Override

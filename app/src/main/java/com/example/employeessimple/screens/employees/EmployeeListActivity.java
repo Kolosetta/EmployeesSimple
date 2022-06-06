@@ -1,6 +1,8 @@
 package com.example.employeessimple.screens.employees;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,11 +24,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class EmployeeListActivity extends AppCompatActivity implements EmployeesListView{
+public class EmployeeListActivity extends AppCompatActivity{
 
-    RecyclerView recyclerView;
-    EmployeesAdapter employeesAdapter;
-    private EmployeeListPresenter presenter;
+    private RecyclerView recyclerView;
+    private EmployeesAdapter employeesAdapter;
+    private EmployeeViewModel viewModel;
 
 
     @Override
@@ -34,13 +36,13 @@ public class EmployeeListActivity extends AppCompatActivity implements Employees
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        presenter = new EmployeeListPresenter(this);
+        //viewModel = ViewModelProvider(this).get(EmployeeViewModel.class);
         employeesAdapter = new EmployeesAdapter();
         employeesAdapter.setEmployeesList(new ArrayList<>());
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(employeesAdapter);
-        presenter.loadData();
+
 
     }
 
@@ -52,9 +54,4 @@ public class EmployeeListActivity extends AppCompatActivity implements Employees
         Toast.makeText(this, "Ошибка получения данных", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.dispose();
-    }
 }
