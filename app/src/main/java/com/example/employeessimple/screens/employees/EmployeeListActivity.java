@@ -1,28 +1,23 @@
 package com.example.employeessimple.screens.employees;
 
+import static com.google.gson.reflect.TypeToken.get;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.Observer;
+
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Application;
 import android.os.Bundle;
-import android.widget.Toast;
-
 import com.example.employeessimple.R;
 import com.example.employeessimple.adapter.EmployeesAdapter;
-import com.example.employeessimple.api.ApiFactory;
-import com.example.employeessimple.api.ApiService;
 import com.example.employeessimple.pojo.Employee;
-import com.example.employeessimple.pojo.Response;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class EmployeeListActivity extends AppCompatActivity{
 
@@ -36,7 +31,18 @@ public class EmployeeListActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //viewModel = ViewModelProvider(this).get(EmployeeViewModel.class);
+        //viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(EmployeeViewModel.class);
+        viewModel = new ViewModelProvider(this).get(EmployeeViewModel.class);
+       // viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(EmployeeViewModel.class);
+
+         viewModel.getEmployees().observe(this, new Observer<List<Employee>>(){
+            @Override
+            public void onChanged(List<Employee> employees) { //Вызывается при изменении данных в lifecycle
+                employeesAdapter.setEmployeesList(employees);
+            }
+        });
+        viewModel.loadData();
+
         employeesAdapter = new EmployeesAdapter();
         employeesAdapter.setEmployeesList(new ArrayList<>());
         recyclerView = findViewById(R.id.recyclerView);
@@ -45,13 +51,4 @@ public class EmployeeListActivity extends AppCompatActivity{
 
 
     }
-
-    public void showData(List<Employee> list){
-        employeesAdapter.setEmployeesList(list);
-    }
-
-    public void showErrorMessage(){
-        Toast.makeText(this, "Ошибка получения данных", Toast.LENGTH_SHORT).show();
-    }
-
 }

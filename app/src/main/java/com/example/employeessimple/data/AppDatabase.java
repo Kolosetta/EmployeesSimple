@@ -1,5 +1,6 @@
 package com.example.employeessimple.data;
 
+import android.app.Application;
 import android.content.Context;
 
 import androidx.room.Database;
@@ -7,6 +8,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.employeessimple.pojo.Employee;
+import com.example.employeessimple.screens.employees.EmployeeListActivity;
 
 @Database(entities = {Employee.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
